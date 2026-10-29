@@ -262,7 +262,7 @@ Una vez cumplido el plazo de acceso vía JIT, de forma automatizada se revocaron
 
 **Access Review** 
 
-Log de Creacion del Access Review
+Log de Creación del Access Review
 
 <img width="484" height="471" alt="Logs-AccessReview-Create" src="https://github.com/user-attachments/assets/8993fff4-1ab9-43bf-bb5f-b6e1a9ddff34" />
 
@@ -270,16 +270,35 @@ Log del **Escenario 1** en cual el reviewer aprueba el usuario
 
 <img width="840" height="373" alt="Logs-AccessReview-Approve" src="https://github.com/user-attachments/assets/af987c1d-b32f-476b-b658-bd48e4af5876" />
 
-Vemos los logs del escenario 2. en el cual el reviewer no da respuesta a la revision 
-Vemos como termino el tiempo de la revision 
+Vemos los logs del **Escenario 2**. en el cual el reviewer no da respuesta a la revisión 
 
+Vemos como termino el tiempo de la revisión 
 
-Vemos como al no tener respuesta del reviewer se activa el Auto-Review para evaluar las configuraciones
+<img width="839" height="465" alt="Logs-AccessReview-Ended" src="https://github.com/user-attachments/assets/4aa48352-d712-4329-b4bf-0a447a200ab3" />
 
+Vemos como al no tener respuesta del reviewer se activa el Auto-Review para evaluar las acciones a tomar en base alo que se configuro en este proyecto
+
+<img width="588" height="370" alt="Logs-AccessReview-AutoReview" src="https://github.com/user-attachments/assets/8b6ef123-390c-4afa-97ce-a75ee99be7d5" />
+
+vemos que los accesos del usuario "PruebaUserAdmin" son revocados
+
+<img width="756" height="370" alt="Logs-AccessReview-Remove" src="https://github.com/user-attachments/assets/b6bb22e7-249d-4c59-9445-1d57d7019cb1" />
+
+Log final que notifica y confirma la eliminación de los accesos del user de forma automatizada  
+
+<img width="464" height="422" alt="Logs-AccessReview-AutoApplyReview" src="https://github.com/user-attachments/assets/2d7628b6-68e7-4f6f-9ab0-bae5b379a397" />
 
 —
 
- ## 💡 Key Takeaways & Lessons Learned 
+ ## CONCLUSIONES 
+ 
+### **Mitigación efectiva de la acumulación de permisos (Privilege Creep)**
+La prohibición de asignaciones permanentes (tanto activas como elegibles) y la caducidad estricta de las membresías, bloquean de raíz el fenómeno del privilege creep. reduciendo drásticamente la superficie de ataque ante la potencial vulneración de credenciales
+### **Adopción exitosa de Zero Standing Access (ZSA) vía PIM for Groups**
+El uso de grupos habilitados para roles integrados con PIM, además del uso obligatorio de activaciones JIT, sujetas a ventanas temporales acotadas y la necesidad de justificar la solicitud de acceso garantiza necesidad legítima de privilegios elevados.
+Con el requerimiento de MFA y un flujo de doble validación (aprobación del User Josue Rivero) Se garantiza la trazabilidad.
+### **Resiliencia operacional ante la inacción (Fail-Safe Access Reviews)**
+Las campaña de Access Reviews automatizada configurada para que en caso de inacción de parte del reviewer elimine los accesos del user traslada la responsabilidad de la seguridad de pasiva a activa.Evitando el riesgo crítico de accesos huérfanos, La aplicación automática de resultados (Auto-apply results) garantiza que el estado real del directorio coincida permanentemente con las políticas de gobernanza y cumpliendo con marcos regulatorios internacionales 
+### **Trazabilidad forense y auditabilidad integral**
+Los registros de auditoría (Audit Logs) analizados durante el ciclo de vida de PIM (desde la solicitud elegible hasta la revocación automática por expiración temporal) y los eventos de cierre del Access Review, proporcionan una evidencia técnica incuestionable. Garantizando un historial forense transparente que permite demostrar y responder dudas sobre lo ocurrido en este proyecto
 
-1. **Zero Standing Access is Attainable:** Cloud identities do not need permanent administrative rights. Enforcing JIT access drastically shrinks the attack surface (*Blast Radius*). 
-2. **Governance Must Be Fail-Safe:** Access Reviews should always default to access removal upon reviewer inactivity, ensuring security takes precedence over convenience. 3. **Auditability is Essential:** PIM and Access Reviews generate clear, immutable audit trails vital for SOC monitoring and regulatory compliance audits. 
