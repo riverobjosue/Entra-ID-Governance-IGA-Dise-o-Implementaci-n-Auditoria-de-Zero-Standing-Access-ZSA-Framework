@@ -222,47 +222,53 @@ Ante la falta de respuesta, vemos que el estado del access review cambio. paso d
 <img width="1591" height="560" alt="02-AccessReview-Deny" src="https://github.com/user-attachments/assets/f9671ef0-d50c-4fc1-be22-e1f4cc5f97ed" />
 
 * **Audit Log Events:** 
-Configuracion y creacion de PIM 
+**Configuración y creación de PIM** 
 
-Momento en el cual PIM es correctamente habilitado para el grupo UserAdmins
+El momento en el cual el grupo UserAdmins es vinculado al motor PIM
 
-inicia el proceso para conceder la condición de Elegible usuario PruebaUserAdmin
+<img width="580" height="569" alt="Logs-PIM-UserAdmins" src="https://github.com/user-attachments/assets/f4c4282d-b875-4e27-83e4-0e908df9eccf" />
 
-Confirmacion de que el user PruebaUserAdmin puede ser Elegible para integrar el grupo UserAdmins de forma temporal via PIM y JIT
+Inicia el proceso para conceder la condición "Elegible" del user "PruebaUserAdmin"
 
+<img width="575" height="565" alt="Logs-PIM-UserElegible" src="https://github.com/user-attachments/assets/33e8ca3e-ba43-4aa5-9e4c-6fcde4a41963" />
 
-En este log se documente las modificaciones en el rol member dentro del grupo User Admins (confguraciones tales como “Duracion Maxima”,”Activacion con MFA” y aprobación via user “Josue Rivero”)
+Confirmación de que el user "PruebaUserAdmin" puede ser Elegible para integrar el grupo UserAdmins de forma temporal via PIM y JIT
 
+<img width="575" height="567" alt="Logs-UserElegibleOK" src="https://github.com/user-attachments/assets/f97bee47-b2a1-4f3d-bc28-0b174ef4ea22" />
 
+En este log se documentan las configuraciones realizadas al rol "member" dentro del grupo "User Admins" (confguraciones tales como “Duracion Maxima”,”Activacion con MFA” y aprobación via user “Josue Rivero”)
 
+<img width="568" height="654" alt="Logs-ConfiguracionesPIM" src="https://github.com/user-attachments/assets/666a144b-19b3-4bc0-a186-b5bfc62d2afe" />
 
 **Logs de Ingreso Vía JIT**
 
 Los registros de auditoría de PIM for Groups se emiten secuencialmente según la finalización de transacciones en el backend de Microsoft Entra:
 
-Acceso Concedido
+**Acceso Concedido**
 
-Vemos la aprobación del user Josué Rivero 
+Vemos la aprobación del user "Josué Rivero" 
 
+<img width="574" height="581" alt="LOGS-SolicitudJITAprobada" src="https://github.com/user-attachments/assets/ebae6ecb-0fd8-41d6-9ecf-68572f314c5b" />
 
 Tenemos el ingreso exitoso del user PruebaUserAdmin al grupo UserAdmins vía JIT. ademas de detallar la justificación de la solicitud de ingreso
 
+<img width="571" height="604" alt="Logs-IngresoJITok" src="https://github.com/user-attachments/assets/f6fb5e2f-12b8-40e2-85f4-14c7c7d7f247" />
 
+**Acceso Vencido** 
 
-Acceso Vencido 
+Una vez cumplido el plazo de acceso vía JIT, de forma automatizada se revocaron los accesos del user al grupo UserAdmins
 
-Una vez cumplida la hora de acceso vía JIT, se elimino al usuario del mismo de forma automatizada
-	
+<img width="579" height="569" alt="Logs-JIT-AccesoVencido" src="https://github.com/user-attachments/assets/92f1f731-aa76-45e1-9b71-77f89974883b" />
 
+**Access Review** 
 
-Access Review 
+Log de Creacion del Access Review
 
-Vemos los logs del Access Review, desde el overview vemos la creacion
+<img width="484" height="471" alt="Logs-AccessReview-Create" src="https://github.com/user-attachments/assets/8993fff4-1ab9-43bf-bb5f-b6e1a9ddff34" />
 
+Log del **Escenario 1** en cual el reviewer aprueba el usuario
 
-Vemos el log del Escenario 1 en cual el reviewer aprueba el usuario
-
-
+<img width="840" height="373" alt="Logs-AccessReview-Approve" src="https://github.com/user-attachments/assets/af987c1d-b32f-476b-b658-bd48e4af5876" />
 
 Vemos los logs del escenario 2. en el cual el reviewer no da respuesta a la revision 
 Vemos como termino el tiempo de la revision 
