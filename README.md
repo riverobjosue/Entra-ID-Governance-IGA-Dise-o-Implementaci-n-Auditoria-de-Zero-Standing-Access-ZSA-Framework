@@ -1,13 +1,12 @@
-# PIM-JIT-ACCESS-REVIEW
-Microsoft Entra ID Governance: Zero Standing Access (ZSA) y Access Review
+# Entra ID Governance (IGA): Diseño, Implementación, Auditoria de Zero Standing Access (ZSA) Framework vía PIM & Access Reviews
 
 ## Objetivo 
-Este proyecto documenta el diseño, implementación y verificación a nivel de auditoría de un marco de **Gobernanza y Administración de Identidades** (**IGA** por sus siglas en inglés). impulsada por principios de **Zero Trust**, enfocándose específicamente en la eliminación de **Privilegios Permanentes (*Standing Privileges*)** en roles administrativos sensibles.
-Mediante la integración de **Privileged Identity Management (PIM) for Groups** con **Revisiones de Acceso Automatizadas (*Access Reviews*)**, esta implementación exige accesos temporales Just-In-Time (JIT), flujos de aprobación, autenticación multifactor (MFA) y un mecanismo de recertificación de accesos seguro ante fallos para prevenir la acumulación de permisos (*Privilege Creep*).
+
+Este proyecto documenta el diseño, implementación y verificación a nivel de auditoría de un marco de **Gobernanza y Administración de Identidades (IGA)** impulsado por principios de **Zero Trust**, enfocado en la eliminación de **Privilegios Permanentes (Standing Privileges)** y la prevención del **Privilege Creep** en roles administrativos sensibles mediante **PIM for Groups**, accesos **Just-In-Time (JIT)** y **Access Reviews automatizadas**.
 
 ---
 
- Arquitectura y Ciclo de Vida de Gobernanza
+## Arquitectura y Ciclo de Vida de Gobernanza
 
 ---
 
@@ -51,7 +50,7 @@ En el apartado “Activation” establecemos las siguientes configuraciones para
 
 <img width="553" height="856" alt="01-PIM-CONF-ACTIV" src="https://github.com/user-attachments/assets/24f75513-9f18-41bd-acfb-ab5fc05f4994" />
 
-Vamos a seleccionar a “Josué Rivero” como el user encargado de aprobar las solicitudes. 
+Vamos a seleccionar a “Josue Rivero” como el user encargado de aprobar las solicitudes. 
 
 <img width="1101" height="864" alt="01-PIM-Overviewer" src="https://github.com/user-attachments/assets/02dfd97d-23a7-4486-a2c2-53fb1f58e246" />
 
@@ -105,7 +104,7 @@ Scope: Seleccionamos “All users”
 
 En el apartado “Reviews” vamos a establecer quién es el encargado de la toma de decisiones de recertificación, también configuramos la duración y recurrencia de la revisión. 
 
-- Seleccionamos a “Josué Rivero” como el Reviewer
+- Seleccionamos a “Josue Rivero” como el Reviewer
 - “Duration”: a fin de demostrar cómo funciona el Access Review en este proyecto, nos limitamos a 1 día. En este campo se establece cuantos días tiene el reviewer para dar una respuesta.
 - “Review Recurrence” a fin de demostrar cómo funciona el Access Review en este proyecto, nos limitamos a 1 vez. En este campo se establece cada cuanto tiempo comienza una campaña de revisión 
 - “Start Date” 10/26/2026 establece el dia en el que comienza la campaña
@@ -116,7 +115,7 @@ En el apartado “Settings” vamos a establecer el comportamiento automatizado 
 
 - “Auto apply results to rescue” Habilitado, establecemos que los cambios se apliquen automaticamente una vez termine la campaña
 - “if reviewers don’t respond” Seleccionamos “Remove Access” en este apartado establecemos que  si el reviewer no da respuesta automaticamente se eliminen los accesos.
-- Establecemos que a Josué Rivero le llegue una notificación cuando termine la revisión 
+- Establecemos que a Josue Rivero le llegue una notificación cuando termine la revisión 
 - Establecemos “ayudas” para que el reviewer pueda tomar decisiones. “No sign -in within 30 days” va a sugerir denegar o eliminar accesos a user que no hayan iniciado sesion en 30 dias
 - “Advanced Settings" establecemos recordatorios, notificaciones, contexto para el reviewer y habilitamos “Justification required” para obligar al review a dar un justificativo sobre sus decisiones. 
 
@@ -161,12 +160,14 @@ Ponemos el justificativo de la aprobación y finalizamos con el boton “Confirm
 
 **Verificacion de acceso concedido**
 
-Desde el user "PruebaUserAdmin" en “Privileged Identity Management” vamos a “my role” y en “Groups” confirmamos que el rol ya se encuentra en “Active Assignments”. Podemos ver la hora de vencimiento del acceso.
+Desde el user "PruebaUserAdmin" en “Privileged Identity Management” vamos a “my role” y en “Groups” confirmamos que el rol ya se encuentra en “Active Assignments”. Podemos ver la hora de vencimiento del acceso. 
 
 <img width="1587" height="489" alt="01-JIT-PruebaUserAdmin-Overview" src="https://github.com/user-attachments/assets/88d685cb-64b0-44d9-9f5e-5949e782f409" />
 <img width="1572" height="245" alt="01-JIT-PruebaUserAdmin-Active" src="https://github.com/user-attachments/assets/a83c1905-339b-4743-b600-fa4ff1bb35ca" />
 
-Desde el user "Josué Rivero" inmediatamente después de conceder el acceso confirmamos que el user se visualiza en el apartado “Active assignments” y no en “Elegible  assignments” 
+**Nota:** Durante la activación del rol, Microsoft Entra ID no solicitó el MFA debido a que al iniciar sesion con el user PruebaUserAdmin el MFA fue solicitado. El motor de PIM utilizó el token existente satisfaciendo la política de seguridad sin generar fricción operativa o fatiga de MFA al usuario final.
+
+Desde el user "Josue Rivero" inmediatamente después de conceder el acceso confirmamos que el user se visualiza en el apartado “Active assignments” y no en “Elegible  assignments” 
 
 <img width="1592" height="465" alt="01-JIT-JosueRivero-Overview" src="https://github.com/user-attachments/assets/c8014d04-0395-4d75-aa1c-b6771d3cd9a3" />
 
@@ -246,7 +247,7 @@ Los registros de auditoría de PIM for Groups se emiten secuencialmente según l
 
 **Acceso Concedido**
 
-Vemos la aprobación del user "Josué Rivero" 
+Vemos la aprobación del user "Josue Rivero" 
 
 <img width="574" height="581" alt="LOGS-SolicitudJITAprobada" src="https://github.com/user-attachments/assets/ebae6ecb-0fd8-41d6-9ecf-68572f314c5b" />
 
